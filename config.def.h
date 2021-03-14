@@ -138,6 +138,7 @@ static Key keys[] = {
 	{ 0,							XF86XK_MonBrightnessDown, spawn, {.v = decreaseBacklight } },
 	{ 0,							XF86XK_AudioMute,        spawn,  {.v = muteVolume } },
 	{ 0,                            XF86XK_AudioMicMute,     spawn,  {.v = muteMicrophone } },
+	{ 0,							XK_Print, spawn,           {.v = flameshotscreenshot} },
 };
 
 /* button definitions */
