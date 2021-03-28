@@ -7,7 +7,7 @@ static const unsigned int gappih    = 8;       /* horiz inner gap between window
 static const unsigned int gappiv    = 8;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 8;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 8;       /* vert outer gap between windows and screen edge */
-static const int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
+static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int usealtbar          = 0;        /* 1 means use non-dwm status bar */
@@ -15,7 +15,7 @@ static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
 static const char *alttrayname      = "tray";    /* Polybar tray instance name */
 static const char *altbarcmd        = ""; /* Alternate bar launch command */
 //static const char *altbarcmd        = "$HOME/.config/polybar/launch.sh"; /* Alternate bar launch command */
-static const char *fonts[]          = {"monospace:size=10", "JoyPixels:pixelsize=10:antialias=true:autohint=true"};
+static const char *fonts[]          = {"monospace:size=11", "JoyPixels:pixelsize=11:antialias=true:autohint=true"};
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -25,6 +25,7 @@ static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+//	[SchemeSel]  = { col_gray4, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
@@ -106,8 +107,8 @@ static Key keys[] = {
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } },
 	{ MODKEY|Mod4Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } },
 	{ MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
+	{ MODKEY,						XK_a,      togglegaps,     {0} },
+	{ MODKEY|ShiftMask,			    XK_0,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
 	{ MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
