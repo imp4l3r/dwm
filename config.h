@@ -7,7 +7,7 @@ static const unsigned int gappih    = 4;       /* horiz inner gap between window
 static const unsigned int gappiv    = 4;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 4;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 4;       /* vert outer gap between windows and screen edge */
-static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+static const int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int usealtbar          = 0;        /* 1 means use non-dwm status bar */
@@ -15,19 +15,11 @@ static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
 static const char *alttrayname      = "tray";    /* Polybar tray instance name */
 static const char *altbarcmd        = ""; /* Alternate bar launch command */
 //static const char *altbarcmd        = "$HOME/.config/polybar/launch.sh"; /* Alternate bar launch command */
-static const char *fonts[]          = {"monospace:size=11", "JoyPixels:pixelsize=11:antialias=true:autohint=true"};
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-//	[SchemeSel]  = { col_gray4, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_gray2,  col_cyan  },
-};
+static const char *fonts[]          = {"JetBrains Mono:size=12", "JoyPixels:pixelsize=12:antialias=true:autohint=true"};
+static const char dmenufont[]       = "JetBrains Mono:size=10";
+
+#include "/home/adramax/.cache/wal/colors-wal-dwm.h"
+
 
 /* Custom keybindings */
 static const char *playernext[] = {"cmus-remote", "--next", NULL};
@@ -80,8 +72,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont};
+static const char *termcmd[]  = { "st", NULL };
 
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
 static char *statuscmds[] = { "notify-send Mouse$BUTTON" };
@@ -97,8 +89,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
-//	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-//	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
@@ -148,7 +140,7 @@ static Key keys[] = {
 	{ 0,							XF86XK_AudioMute,        spawn,  {.v = muteVolume } },
 	{ 0,                            XF86XK_AudioMicMute,     spawn,  {.v = muteMicrophone } },
 	{ 0,							XK_Print, spawn,           {.v = flameshotscreenshot} },
-	{ MODKEY,                            XK_p, spawn,               {.v = acpicallerdmenu} },
+	{ MODKEY|ShiftMask,             XK_p, spawn,               {.v = acpicallerdmenu} },
 };
 
 /* button definitions */
